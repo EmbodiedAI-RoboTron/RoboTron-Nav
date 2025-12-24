@@ -1,0 +1,169 @@
+fusion_mode: Temporal_UVFormer_move
+#Linear: true
+alignment_layer: Linear
+action_token: true
+multi_action_token: true
+nclass_gripper: 20
+nav_history_len: 60
+continue_iter: true
+reset_lr: false
+reset_epoch: -1
+load_from_checkpoint: # ~/yanfeng/project/robotic/robo_mm/exps/uvf_chores/run1/checkpoint_gripper_Temporal_UVFormer_move_hist_1_aug_10_4_traj_cons_ws_12_mpt_dolly_3b_fc_768_9.pth9.pth
+from_scratch: false
+resume_from_checkpoint: # ~/zhongyufeng/code/robot/robo_mm_new/exps/uvf_chores_room_no_job/checkpoint_gripper_Temporal_UVFormer_move_hist_1_aug_10_4_traj_cons_ws_12_mpt_dolly_3b_fc_768_112400.pth112400_iter.pth
+train_uvformer: true  # 当使用UVFormer时可打开
+occ_loss: true
+occ_loss_weight: [0.5,0.25,0.25,0.25] # occ, r, g, b 
+colour_aug: [0,0,0,0] # [0.8, 0.5, 0.5, 0.1] #brightness_factor, contrast_factor, saturation_factor, hue_factor
+train_action: true
+eval: false # true
+eval_first: false # true
+eval_steps: 0
+only_single_task: false # true
+sample_mode: 1   # -1是随机选择token排列方式；0表示image+action；1表示action；2表示OCC+action；3表示：image+OCC+action; 4表示：OCC+image+action
+env_resample: false
+rotate: true
+data_type: [chores]
+data_eval: [chores] # 哪个数据集拿来评估
+data_path_list: [[],[],[],[],[]]
+state_matrixs_path:  ["~/liufanfan-mv-from/data/new_calvin_D_1","","","",""]
+calvin_dataset: [~/zhongyufeng/spoc/fifteen/ObjectNavType/replay]
+loss_weight: {occ: 0.1, action: 1}
+validation: false
+bevformer_config: bevformer_config/bevformer_b_s_rotate.yaml
+data_tasks_groups: None
+num_epochs: 5
+window_size: 12
+learning_rate: 0.0001
+lr_scheduler: cosine
+batch_size_calvin: 4
+save_dir: ~/zhongyufeng/code/robot/robo_mm_new/exps/nav-vqa-gripper-5M-fp32-cos-095
+
+use_static: false
+SS: 0.95
+
+use_vqa: true
+vqa_sample_mode: 5
+vqa_window_size: 1
+vqa_batch_size: 2
+vqa_use_static: true # vqa must use static features!!!
+vqa_workers: 2
+
+original_image_shapes:
+  rgb_static: [200, 200, 3]
+  rgb_gripper: [84, 84, 3]
+cam_trained: ["rgb_static","rgb_gripper"]
+image_feature_out: [0]
+extrinsic_jitter: 0
+UVformer:
+  cam_trained: ["rgb_static","rgb_gripper"]
+  original_image_shapes:
+    rgb_static: [200, 200, 3]
+    rgb_gripper: [84, 84, 3]
+  type: DeformableTransformer
+  transformer_config:
+    task_name: LLD
+    hidden_dim: 1024
+    nhead: 8
+    num_decoder_layers: 2
+    dim_feedforward: 1024
+    dropout: 0.1
+    PreProcessing: {left: 1, right: 3, front: 2 , back: 2, dilate: 1} # 注意left,rgiht为Y轴，front back为X轴
+    grid_resolution: [0.2, 0.2, 0.2] # 注意由于没有使用UVformer，所以未使用其他值此处0.05是
+    ref_z_range: [0.0, 1.0]
+    rotate: true
+    upsample: 2
+    self_attn_type: cosformer
+    reuse_ref_point: false
+    norm: None
+    use_ffn: false
+PETR:
+  hidden_dim: 1024
+  depth_step: 0.05
+  depth_num: 4
+  depth_start: 0.05
+  position_range: [-0.2, -0.2, -0.05, 0.2, 0.2, 0.3] # 当使用UVFormer时此处为已爪子为坐标系
+  
+vision_encoder_path: ViT-L-14
+replan: -1
+visualize: false
+vision_encoder_pretrained: openai
+lm_path: ~/yanfeng/project/robotic/RoboFlamingo/checkpoints/mpt-1b-redpajama-200b-dolly
+calvin_conf_path: ~/yanfeng/project/robotic/calvin/calvin_models/conf
+batch_size_sim: 1
+calvin_seq_path: ~/yanfeng/project/robotic/RoboFlamingo/eval_sequences.json
+tokenizer_path: ~/yanfeng/project/robotic/RoboFlamingo/checkpoints/mpt-1b-redpajama-200b-dolly
+reset: false
+diverse_inst: false
+future_act_len: -1
+cross_attn_every_n_layers: 4
+run_name: RobotFlamingoDBG
+use_media_placement_augmentation: false
+offline: false
+logging_steps: 100
+clip_cache_dir: ~/yanfeng/project/robotic/RoboFlamingo/checkpoints
+gradient_accumulation_steps: 1
+openflamingo_checkpoint: ~/yanfeng/project/robotic/RoboFlamingo/checkpoints/OpenFlamingo-3B-vitl-mpt1b-langinstruct/checkpoint.pt
+delete_previous_checkpoint: false
+seed: 42
+loss_multiplier_calvin: 1.0
+warmup_steps: 10
+local_rank: 0
+weight_decay: 0.1
+precision: fp32
+workers: 4
+train_num_samples_calvin: 100
+dataset_resampled: true
+dist_url: env://
+dist_backend: nccl
+horovod: false
+no_set_device_rank: false
+report_to_wandb: false
+wandb_project: RoboFlamingo_D2D
+wandb_entity: null
+save_checkpoints_to_wandb: false
+freeze_embed: false
+use_gripper: true
+use_state: false
+hist_window: 1
+eval_hist_size: -1
+sep_resampler: false
+train_params: -1
+rgb_pad: -1 # 10
+gripper_pad: -1 # 4
+n_timesteps: 150
+predict_epsilon: false
+head_type: fc
+n_obs_steps: 6
+diff_horizon: 32
+last_action: false
+use_hist: false
+traj_cons: true
+debug: false
+sep_lm_head: false
+clip_state: false
+unfreeze_vit: false
+text_aug: false
+residual: false
+tcp_rel: false
+dif_ws: false
+partial_data: false
+freeze_sampler: false
+fwd_pred: false
+fwd_pred_hand: false
+no_pretrain: false
+real_data: false
+no_image_patch: false
+cotrain: false
+batch_size_vl: 20
+vl_task_weights: 0.005
+global_latent: 1
+save_every_iter: 1000 # 5000
+pad_length: -1
+hidden_size: 768
+decoder_type: fc
+min_window_size: 12
+max_window_size: 24
+llm_name: mpt_dolly_3b
+pooling: max
+multi_step_action: 1

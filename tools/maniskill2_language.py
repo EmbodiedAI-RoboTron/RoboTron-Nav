@@ -1,0 +1,25 @@
+
+
+task_lang = {
+    "AssemblingKits": "pick up one of the misplaced shapes on the board/kit and insert it into the correct empty slot.",
+    "LiftCube": "A simple task where the objective is to push and move a cube to a goal region in front of it",
+    "MoveBucket": "Pick up a bucket and move it.",
+    "OpenCabinetDoor": "Use the Fetch mobile manipulation robot to move towards a target cabinet and open the target door out.",
+    "OpenCabinetDrawer": "Use the Fetch mobile manipulation robot to move towards a target cabinet and open the target drawer out.",
+    "PandaAvoidObstacles": "avigate through a dense array of obstacles in space while actively perceiving the environment.",
+    "PegInsertionSide": "Pick up a orange-white peg and insert the orange end into the box with a hole in it.",
+    "PickClutterYCB": "Selecting and positioning a multiple YCB object.",
+    "PickCube": "Picking a cube in a target position.",
+    "PickSingleEGAD": "Selecting and positioning a single EGAD object.",
+    "PickSingleYCB": "Selecting and positioning a single YCB object.",
+    "PlugCharger": "The robot must pick up one of the misplaced shapes on the board/kit and insert it into the correct empty slot.",
+    "PushChair": "pick up and plug a charger into a vertical socket.",
+    "StackCube": "Lifting a cube and stacking it on top of another cube",
+    "TurnFaucet": "turn on faucets of different geometries and topologies using a stationary arm.",
+    "Excavate": "Gathering a specified quantity of clay and elevating it to a specified height.",
+    "Fill": "Filling the target beaker with clay from a bucket.",
+    "Hang": "Hanging a noodle on the target pole.",
+    "Pinch": "Deforming plasticine into a target shape by randomly pinching initial shapes.",
+    "Pour": "Pouring water into the target beaker from a bottle.",
+    "Write": "Writing a target character on clay.",
+}

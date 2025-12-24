@@ -1,0 +1,1 @@
+sh job/run.sh 1 True /path/to/best/ckpt
