@@ -58,10 +58,12 @@ We sincerely appreciate [RoboTron-Mani](https://github.com/EmbodiedAI-RoboTron/R
 # 📖 Citation
 If you find this project useful, please feel free to leave a star and cite our paper:
 ```
-@article{zhong2025p3nav,
-  title={P3nav: A unified framework for embodied navigation integrating perception, planning, and prediction},
-  author={Zhong, Yufeng and Feng, Chengjian and Yan, Feng and Liu, Fanfan and Zheng, Liming and Ma, Lin},
-  journal={arXiv preprint arXiv:2503.18525},
-  year={2025}
+@InProceedings{Zhong_2025_ICCV,
+    author    = {Zhong, Yufeng and Feng, Chengjian and Yan, Feng and Liu, Fanfan and Zheng, Liming and Ma, Lin},
+    title     = {RoboTron-Nav: A Unified Framework for Embodied Navigation Integrating Perception, Planning, and Prediction},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2025},
+    pages     = {6416-6425}
 }
 ```
